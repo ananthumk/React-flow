@@ -6,18 +6,16 @@ function NodeForm({
   onDeleteNode,
   existingNodes,
   selectedNode,
-  onFormClose 
+   
 }) {
-  const [formMode, setFormMode] = useState('add'); // 'add', 'edit', 'delete'
+  const [formMode, setFormMode] = useState('add'); 
   const [nodeLabel, setNodeLabel] = useState('');
-  const [nodeId, setNodeId] = useState('');
   const [selectedNodeId, setSelectedNodeId] = useState('');
 
   useEffect(() => {
     if (selectedNode) {
       setFormMode('edit');
       setSelectedNodeId(selectedNode.id);
-      setNodeId(selectedNode.id);
       setNodeLabel(selectedNode.data?.label || '');
     }
   }, [selectedNode]);
@@ -41,7 +39,6 @@ function NodeForm({
 
     onAddNode(newNode);
     setNodeLabel('');
-    setNodeId('');
     alert('Node added successfully!');
   };
 
@@ -54,7 +51,6 @@ function NodeForm({
 
     onEditNode(selectedNodeId, { data: { label: nodeLabel } });
     setNodeLabel('');
-    setNodeId('');
     setSelectedNodeId('');
     setFormMode('add');
     alert('Node updated successfully!');
@@ -70,7 +66,6 @@ function NodeForm({
     if (window.confirm(`Are you sure you want to delete node "${nodeLabel}"?`)) {
       onDeleteNode(selectedNodeId);
       setNodeLabel('');
-      setNodeId('');
       setSelectedNodeId('');
       setFormMode('add');
       alert('Node deleted successfully!');
@@ -80,7 +75,6 @@ function NodeForm({
   const handleSelectMode = (mode) => {
     setFormMode(mode);
     setNodeLabel('');
-    setNodeId('');
     setSelectedNodeId('');
   };
 
